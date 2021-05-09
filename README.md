@@ -8,4 +8,4 @@ Open the EmbedUI Application on your PC, Connect your programmed hardware & you 
 That's all !
 
 
-Check out full documentation on [https://embedui.github.io/documentation](https://embedui.github.io/documentation){target=_blank}
+Check out full documentation on [https://embedui.github.io/documentation](https://embedui.github.io/documentation)
