@@ -49,9 +49,8 @@
 #define UPDATE_COLOR_COMMAND "UFC"
 #define UPDATE_BACKGROUND_COLOR_COMMAND "UBC"
 #define UPDATE_POSITION_COMMAND "UP"
-#define UPDATE_SIZE_COMMAND "US"
+#define  UPDATE_SIZE_COMMAND "US"
 #define UPDATE_VISIBILTY_COMMAND "UV"
-#define SET_ROTATION_COMMAND "SR"
 #define REMOVE_OBJECT_COMMAND "RO"
 #define UPDATE_OPACITY_COMMAND "UO"
 #define LINE_COMMAND "L"
@@ -66,7 +65,6 @@
 #define CREATE_BUTTON_COMMAND "CB"
 #define ADD_EVENT_COMMAND "AE"
 #define CREATE_IMAGE_COMMAND "CI"
-
 
 #define CLICK_EVENT 1
 #define HOVER_EVENT 2
@@ -104,17 +102,13 @@ class EmbedUI
     void updatePosition(String id, long x, long y);
     void setSize(String id, long w, long h);
     void setVisibility(String id, bool visible);
-    void setOpacity(String id , int opacity);
-	void setRotation(String id,float degrees);
     void removeObject(String id);
-	
+    void setOpacity(String id , int opacity);
     void addEvent(String id, int event, void (*callBack_func)());
     void handleEvents();
-	
     String createText(String text_data, long font_size, long x, long y, uint32_t fg_color, bool hasBackground, uint32_t bg_color , long padding_x , long padding_y, bool center_align_x, bool center_align_y, String id );
     void updateText(String id, String value);
     void updateTextColor(String id, uint32_t new_color);
-	
     String createLine(long x1, long y1, long x2, long y2, long line_thickness, uint32_t fill_color , String id);
     String createRect(long x, long y, long w, long h, long border_thickness, uint32_t b_color, String id );
     String createRoundRect(long x, long y, long w, long h, long border_thickness, long border_radius, uint32_t b_color , String id );
@@ -124,10 +118,8 @@ class EmbedUI
     String createFilledCircle(long x, long y, long radius, uint32_t fill_color, String id);
     String createTriangle(long x1, long y1, long x2, long y2, long x3, long y3,  long border_thickness, uint32_t b_color, String id);
     String createFilledTriangle(long x1, long y1, long x2, long y2, long x3, long y3, uint32_t fill_color, String id );
-	
     String createButton(String button_text, long font_size, long x, long y, long w, long h, int border_radius, uint32_t text_color, uint32_t bg_color, void (*onclick_callBack)(), String id);
     void updateButtonText(String id, String value);
-	
     String createImageFromLink(String link, long x, long y, long w, long h,  String id);
     
     uint32_t color(uint8_t _r, uint8_t _g, uint8_t _b);
