@@ -52,6 +52,7 @@
 #define UPDATE_SIZE_COMMAND "US"
 #define UPDATE_VISIBILTY_COMMAND "UV"
 #define SET_ROTATION_COMMAND "SR"
+#define SET_TRANSITION_COMMAND "ST"
 #define REMOVE_OBJECT_COMMAND "RO"
 #define UPDATE_OPACITY_COMMAND "UO"
 #define LINE_COMMAND "L"
@@ -72,6 +73,14 @@
 #define HOVER_EVENT 2
 #define MOUSE_IN_EVENT 3
 #define MOUSE_OUT_EVENT 4
+
+#define LINEAR 100
+#define SOFT 200
+#define SOFT_START 300
+#define SOFT_END 400
+#define SOFT_START_END 500
+
+
 
 class Font {
   public:
@@ -106,7 +115,9 @@ class EmbedUI
     void setVisibility(String id, bool visible);
     void setOpacity(String id , int opacity);
 	void setRotation(String id,float degrees);
+	void setTransition(String id, int transition_type, unsigned long  transition_duration, unsigned long  transition_delay);
     void removeObject(String id);
+	
 	
     void addEvent(String id, int event, void (*callBack_func)());
     void handleEvents();

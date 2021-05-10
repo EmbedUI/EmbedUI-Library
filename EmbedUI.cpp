@@ -491,6 +491,19 @@ void EmbedUI::setRotation(String id, float degrees){
   _serial.print(String(degrees));
   _serial.println(SEPARATOR);
 }
+void EmbedUI::setTransition(String id, int transition_type, unsigned long transition_duration, unsigned long transition_delay)
+{
+  _serial.print(SET_TRANSITION_COMMAND);
+  _serial.print(SEPARATOR);
+  _serial.print(id);
+  _serial.print(SEPARATOR);
+  _serial.print(String(transition_type));
+  _serial.print(SEPARATOR);
+  _serial.print(String(transition_duration));
+  _serial.print(SEPARATOR);
+  _serial.print(String(transition_delay));
+  _serial.println(SEPARATOR);
+}
 void EmbedUI::removeObject(String id) {
   _serial.print(REMOVE_OBJECT_COMMAND);
   _serial.print(SEPARATOR);
