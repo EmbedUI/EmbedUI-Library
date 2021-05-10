@@ -153,25 +153,25 @@ void basicShapesTextDemo()
        Parameters: text_string,font_soze(in px),x,y,foreground_color(unit32_t),background_color_enable(bool),background_color(unit32_t),
                    padding_x(in px),padding_y(in px),center_align_x(bool),center_align_y(bool), id (String)
   */
-  display.createText("Fast-EmbedUI", MAX_SCREEN_HEIGHT / 30, 10, 10, RED, false, 0, 0, 0, true, true, "String1");
+  display.createText("EmbedUI", MAX_SCREEN_HEIGHT / 30, 10, 10, RED, false, 0, 0, 0, true, true, "String1");
   delay(500);
   display.clear();
-  display.createText("Fast-EmbedUI", MAX_SCREEN_HEIGHT / 25, 10, 10, GREEN, false, 0, 0, 0, true, true, "String2");
+  display.createText("EmbedUI", MAX_SCREEN_HEIGHT / 25, 10, 10, GREEN, false, 0, 0, 0, true, true, "String2");
   delay(500);
   display.clear();
-  display.createText("Fast-EmbedUI", MAX_SCREEN_HEIGHT / 22, 10, 10, BLUE, false, 0, 0, 0, true, true, "String3");
+  display.createText("EmbedUI", MAX_SCREEN_HEIGHT / 22, 10, 10, BLUE, false, 0, 0, 0, true, true, "String3");
   delay(500);
   display.clear();
-  display.createText("Fast-EmbedUI", MAX_SCREEN_HEIGHT / 16, 10, 10, YELLOW , false, 0, 0, 0, true, true, "String4");
+  display.createText("EmbedUI", MAX_SCREEN_HEIGHT / 16, 10, 10, YELLOW , false, 0, 0, 0, true, true, "String4");
   delay(500);
   display.clear();
-  display.createText("Fast-EmbedUI", MAX_SCREEN_HEIGHT / 14, 10, 10, TEAL, false, 0, 0, 0, true, true, "String5");
+  display.createText("EmbedUI", MAX_SCREEN_HEIGHT / 14, 10, 10, TEAL, false, 0, 0, 0, true, true, "String5");
   delay(500);
   display.clear();
-  display.createText("Fast-EmbedUI", MAX_SCREEN_HEIGHT / 8, 10, 10, PURPLE, false, 0, 0, 0, true, true, "String6");
+  display.createText("EmbedUI", MAX_SCREEN_HEIGHT / 8, 10, 10, PURPLE, false, 0, 0, 0, true, true, "String6");
   delay(500);
   display.clear();
-  display.createText("Fast-EmbedUI", MAX_SCREEN_HEIGHT / 5, 10, 10, WHITE , false, 0, 0, 0, true, true, "String7");
+  display.createText("EmbedUI", MAX_SCREEN_HEIGHT / 5, 10, 10, WHITE , false, 0, 0, 0, true, true, "String7");
   delay(2000);
 
   //Some extra demos
@@ -181,7 +181,7 @@ void basicShapesTextDemo()
 
   display.clear();
   display.setDisplayBackgroundColor(display.color(255, 255, 255));
-  display.createText("Fast-EmbedUI", MAX_SCREEN_HEIGHT / 5, 10, 10, NAVY , false, 0, 0, 0, true, true, "String8");
+  display.createText("EmbedUI", MAX_SCREEN_HEIGHT / 5, 10, 10, NAVY , false, 0, 0, 0, true, true, "String8");
 
 }
 
