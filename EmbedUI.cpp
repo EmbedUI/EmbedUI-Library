@@ -483,6 +483,14 @@ void EmbedUI::setVisibility(String id, bool visible) {
   _serial.print(String(visible));
   _serial.println(SEPARATOR);
 }
+void EmbedUI::setRotation(String id, float degrees){
+  _serial.print(SET_ROTATION_COMMAND);
+  _serial.print(SEPARATOR);
+  _serial.print(id);
+  _serial.print(SEPARATOR);
+  _serial.print(String(degrees));
+  _serial.println(SEPARATOR);
+}
 void EmbedUI::removeObject(String id) {
   _serial.print(REMOVE_OBJECT_COMMAND);
   _serial.print(SEPARATOR);
