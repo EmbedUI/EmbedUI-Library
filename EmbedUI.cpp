@@ -405,6 +405,84 @@ String EmbedUI::createImageFromLink(String link, long x, long y, long w, long h,
   return id;
 }
 
+ 
+String EmbedUI::createImageFromFile(String file_name, long x, long y, long w, long h,  String id)
+{
+  _serial.print(CREATE_IMAGE_FROM_FILE_COMMAND);
+  _serial.print(SEPARATOR);
+  _serial.print(file_name);
+  _serial.print(SEPARATOR);
+  _serial.print(String(x));
+  _serial.print(SEPARATOR);
+  _serial.print(String(y));
+  _serial.print(SEPARATOR);
+  _serial.print(String(w));
+  _serial.print(SEPARATOR);
+  _serial.print(String(h));
+  _serial.print(SEPARATOR);
+  _serial.print(id);
+  _serial.print(SEPARATOR);
+  _serial.println();
+  return id;
+}
+
+String EmbedUI::createVideoFromLink(String link, long x, long y, long w, long h, bool enable_controls, bool mute_audio, bool enable_autoplay, bool loop_video, String id)
+{
+  _serial.print(CREATE_VIDEO_COMMAND);
+  _serial.print(SEPARATOR);
+  _serial.print(link);
+  _serial.print(SEPARATOR);
+  _serial.print(String(x));
+  _serial.print(SEPARATOR);
+  _serial.print(String(y));
+  _serial.print(SEPARATOR);
+  _serial.print(String(w));
+  _serial.print(SEPARATOR);
+  _serial.print(String(h));
+  _serial.print(SEPARATOR);
+  _serial.print(String(enable_controls));
+  _serial.print(SEPARATOR);
+  _serial.print(String(mute_audio));
+  _serial.print(SEPARATOR);
+  _serial.print(String(enable_autoplay));
+  _serial.print(SEPARATOR);
+  _serial.print(String(loop_video));
+  _serial.print(SEPARATOR);
+  _serial.print(id);
+  _serial.print(SEPARATOR);
+  _serial.println();
+  return id;
+}
+ 
+String EmbedUI::createVideoFromFile(String file_name, long x, long y, long w, long h, bool enable_controls, bool mute_audio, bool enable_autoplay, bool loop_video, String id)
+{
+  _serial.print(CREATE_VIDEO_FROM_FILE_COMMAND);
+  _serial.print(SEPARATOR);
+  _serial.print(file_name);
+  _serial.print(SEPARATOR);
+  _serial.print(String(x));
+  _serial.print(SEPARATOR);
+  _serial.print(String(y));
+  _serial.print(SEPARATOR);
+  _serial.print(String(w));
+  _serial.print(SEPARATOR);
+  _serial.print(String(h));
+  _serial.print(SEPARATOR);
+  _serial.print(String(enable_controls));
+  _serial.print(SEPARATOR);
+  _serial.print(String(mute_audio));
+  _serial.print(SEPARATOR);
+  _serial.print(String(enable_autoplay));
+  _serial.print(SEPARATOR);
+  _serial.print(String(loop_video));
+  _serial.print(SEPARATOR);
+  _serial.print(id);
+  _serial.print(SEPARATOR);
+  _serial.println();
+  return id;
+}
+ 
+	
 EmbedUI::EmbedUI(HardwareSerial & serial): _serial(serial) {
 }
 

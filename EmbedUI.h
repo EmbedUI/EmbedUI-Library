@@ -67,7 +67,9 @@
 #define CREATE_BUTTON_COMMAND "CB"
 #define ADD_EVENT_COMMAND "AE"
 #define CREATE_IMAGE_COMMAND "CI"
-
+#define CREATE_IMAGE_FROM_FILE_COMMAND "CIF"
+#define CREATE_VIDEO_COMMAND "CV"
+#define CREATE_VIDEO_FROM_FILE_COMMAND "CVF"
 
 #define CLICK_EVENT 1
 #define HOVER_EVENT 2
@@ -140,6 +142,10 @@ class EmbedUI
     void updateButtonText(String id, String value);
 	
     String createImageFromLink(String link, long x, long y, long w, long h,  String id);
+    String createImageFromFile(String file_name, long x, long y, long w, long h,  String id);
+	
+	String createVideoFromLink(String link, long x, long y, long w, long h, bool enable_controls, bool mute_audio, bool enable_autoplay, bool loop_video, String id);
+	String createVideoFromFile(String file_name, long x, long y, long w, long h, bool enable_controls, bool mute_audio, bool enable_autoplay, bool loop_video, String id);
     
     uint32_t color(uint8_t _r, uint8_t _g, uint8_t _b);
 };
