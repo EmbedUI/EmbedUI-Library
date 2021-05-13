@@ -70,6 +70,8 @@
 #define CREATE_IMAGE_FROM_FILE_COMMAND "CIF"
 #define CREATE_VIDEO_COMMAND "CV"
 #define CREATE_VIDEO_FROM_FILE_COMMAND "CVF"
+#define ADD_UNDERLINE_COMMAND "AU"
+#define ADD_STRIKE_THROUGH_COMMAND "AST"
 
 #define CLICK_EVENT 1
 #define HOVER_EVENT 2
@@ -118,8 +120,9 @@ class EmbedUI
     void setOpacity(String id , int opacity);
 	void setRotation(String id,float degrees);
 	void setTransition(String id, int transition_type, unsigned long  transition_duration, unsigned long  transition_delay);
+	void addUnderline(String id, uint32_t color);
+	void addStrikeThrough(String id, uint32_t color);
     void removeObject(String id);
-	
 	
     void addEvent(String id, int event, void (*callBack_func)());
     void handleEvents();

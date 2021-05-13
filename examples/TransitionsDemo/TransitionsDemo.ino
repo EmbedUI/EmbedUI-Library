@@ -68,11 +68,11 @@ void setup() {
   display.setDisplayBackgroundColor(BLACK);//set the background color of the screen
 
   //Load some info text
-  display.createText("LINEAR", MAX_SCREEN_HEIGHT / 20, 0, MAX_SCREEN_HEIGHT / 6 -  MAX_SCREEN_HEIGHT / 16 + MAX_SCREEN_HEIGHT / 40, WHITE, false, 0, 0, 0, true, false, "textLinear");
-  display.createText("SOFT", MAX_SCREEN_HEIGHT / 20, 0, 2 * MAX_SCREEN_HEIGHT / 6 -  MAX_SCREEN_HEIGHT / 16 + MAX_SCREEN_HEIGHT / 40, WHITE, false, 0, 0, 0, true, false, "textLinear");
-  display.createText("SOFT_START", MAX_SCREEN_HEIGHT / 20, 0, 3 * MAX_SCREEN_HEIGHT / 6 -  MAX_SCREEN_HEIGHT / 16 + MAX_SCREEN_HEIGHT / 40, WHITE, false, 0, 0, 0, true, false, "textLinear");
-  display.createText("SOFT_END", MAX_SCREEN_HEIGHT / 20, 0, 4 * MAX_SCREEN_HEIGHT / 6 -  MAX_SCREEN_HEIGHT / 16 + MAX_SCREEN_HEIGHT / 40, WHITE, false, 0, 0, 0, true, false, "textLinear");
-  display.createText("SOFT_START_END", MAX_SCREEN_HEIGHT / 20, 0, 5 * MAX_SCREEN_HEIGHT / 6 -  MAX_SCREEN_HEIGHT / 16 + MAX_SCREEN_HEIGHT / 40, WHITE, false, 0, 0, 0, true, false, "textLinear");
+  display.createText("LINEAR", MAX_SCREEN_HEIGHT / 20, 0, MAX_SCREEN_HEIGHT / 6 -  MAX_SCREEN_HEIGHT / 16 + MAX_SCREEN_HEIGHT / 40, WHITE, false, 0, 0, 0, true, false, "text1");
+  display.createText("SOFT", MAX_SCREEN_HEIGHT / 20, 0, 2 * MAX_SCREEN_HEIGHT / 6 -  MAX_SCREEN_HEIGHT / 16 + MAX_SCREEN_HEIGHT / 40, WHITE, false, 0, 0, 0, true, false, "text2");
+  display.createText("SOFT_START", MAX_SCREEN_HEIGHT / 20, 0, 3 * MAX_SCREEN_HEIGHT / 6 -  MAX_SCREEN_HEIGHT / 16 + MAX_SCREEN_HEIGHT / 40, WHITE, false, 0, 0, 0, true, false, "text3");
+  display.createText("SOFT_END", MAX_SCREEN_HEIGHT / 20, 0, 4 * MAX_SCREEN_HEIGHT / 6 -  MAX_SCREEN_HEIGHT / 16 + MAX_SCREEN_HEIGHT / 40, WHITE, false, 0, 0, 0, true, false, "text4");
+  display.createText("SOFT_START_END", MAX_SCREEN_HEIGHT / 20, 0, 5 * MAX_SCREEN_HEIGHT / 6 -  MAX_SCREEN_HEIGHT / 16 + MAX_SCREEN_HEIGHT / 40, WHITE, false, 0, 0, 0, true, false, "text5");
 
   //Load some images
   display.createImageFromLink("https://embedui.github.io/img/arduino_logo.png", MAX_SCREEN_WIDTH / 10 - MAX_SCREEN_HEIGHT / 16, MAX_SCREEN_HEIGHT / 6 -  MAX_SCREEN_HEIGHT / 16, MAX_SCREEN_HEIGHT / 8, MAX_SCREEN_HEIGHT / 8, "ArduinoLogo1");

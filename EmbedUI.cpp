@@ -582,6 +582,24 @@ void EmbedUI::setTransition(String id, int transition_type, unsigned long transi
   _serial.print(String(transition_delay));
   _serial.println(SEPARATOR);
 }
+void EmbedUI::addUnderline(String id, uint32_t color)
+{
+  _serial.print(ADD_UNDERLINE_COMMAND);
+  _serial.print(SEPARATOR);
+  _serial.print(id);
+  _serial.print(SEPARATOR);
+  _serial.print(String(color, HEX));
+  _serial.println(SEPARATOR);
+}
+void EmbedUI::addStrikeThrough(String id, uint32_t color)
+{
+  _serial.print(ADD_STRIKE_THROUGH_COMMAND);
+  _serial.print(SEPARATOR);
+  _serial.print(id);
+  _serial.print(SEPARATOR);
+  _serial.print(String(color, HEX));
+  _serial.println(SEPARATOR);
+}
 void EmbedUI::removeObject(String id) {
   _serial.print(REMOVE_OBJECT_COMMAND);
   _serial.print(SEPARATOR);
