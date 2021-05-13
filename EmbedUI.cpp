@@ -40,10 +40,15 @@ Font::Font(String font_link, String font_name, String font_fallback) {
   _font_name = font_name;
   _font_fallback = font_fallback;
 }
+Font::Font( String font_fallback) {
+  _font_link = "";
+  _font_name = "";
+  _font_fallback = font_fallback;
+}
 
 String EmbedUI::createText(String text_data, long font_size, long x, long y,
-                               uint32_t fg_color = 0, bool hasBackground = false, uint32_t bg_color = 0, long padding_x = 16,
-                               long padding_y = 8, bool center_align_x = false, bool center_align_y = false, String id = "T_" + String(millis()))
+                               uint32_t fg_color , bool hasBackground , uint32_t bg_color , long padding_x ,
+                               long padding_y , bool center_align_x , bool center_align_y , String id )
 {
   _serial.print(CREATE_TEXT_COMMAND);
   _serial.print(SEPARATOR);
@@ -75,6 +80,43 @@ String EmbedUI::createText(String text_data, long font_size, long x, long y,
   return id;
 }
 
+String EmbedUI::createTextBox(String text_data, long font_size, long x, long y, long w, long h, uint32_t text_color, bool hasBackground, uint32_t bg_color , long padding_x , long padding_y, bool center_align_x, bool center_align_y, String id )
+{
+  _serial.print(CREATE_TEXT_BOX_COMMAND);
+  _serial.print(SEPARATOR);
+  _serial.print(text_data);
+  _serial.print(SEPARATOR);
+  _serial.print(String(font_size));
+  _serial.print(SEPARATOR);
+  _serial.print(String(x));
+  _serial.print(SEPARATOR);
+  _serial.print(String(y));
+  _serial.print(SEPARATOR);
+  _serial.print(String(w));
+  _serial.print(SEPARATOR);
+  _serial.print(String(h));
+  _serial.print(SEPARATOR);
+  _serial.print(String(text_color, HEX));
+  _serial.print(SEPARATOR);
+  _serial.print(String(hasBackground));
+  _serial.print(SEPARATOR);
+  _serial.print(String(bg_color, HEX));
+  _serial.print(SEPARATOR);
+  _serial.print(String(padding_x));
+  _serial.print(SEPARATOR);
+  _serial.print(String(padding_y));
+  _serial.print(SEPARATOR);
+  _serial.print(String(center_align_x));
+  _serial.print(SEPARATOR);
+  _serial.print(String(center_align_y));
+  _serial.print(SEPARATOR);
+  _serial.print(id);
+  _serial.print(SEPARATOR);
+  _serial.println();
+  return id;
+}
+
+
 void EmbedUI::updateText(String id, String value) {
   _serial.print(UPDATE_TEXT_COMMAND);
   _serial.print(SEPARATOR);
@@ -90,6 +132,16 @@ void EmbedUI::updateTextColor(String id, uint32_t new_color) {
   _serial.print(id);
   _serial.print(SEPARATOR);
   _serial.print(String(new_color, HEX));
+  _serial.println(SEPARATOR);
+}
+
+void EmbedUI::updateTextFont(String id, Font font)
+{
+  _serial.print(UPDATE_TEXT_FONT_COMMAND);
+  _serial.print(SEPARATOR);
+  _serial.print(id);
+  _serial.print(SEPARATOR);
+  _serial.print("'" + font._font_name + "'," + font._font_fallback);
   _serial.println(SEPARATOR);
 }
 
@@ -600,6 +652,44 @@ void EmbedUI::addStrikeThrough(String id, uint32_t color)
   _serial.print(String(color, HEX));
   _serial.println(SEPARATOR);
 }
+void EmbedUI::setFontWeight(String id, int font_weight)
+{
+  _serial.print(SET_FONT_WEIGHT_COMMAND);
+  _serial.print(SEPARATOR);
+  _serial.print(id);
+  _serial.print(SEPARATOR);
+  _serial.print(String(font_weight));
+  _serial.println(SEPARATOR);
+}
+void EmbedUI::setTextNormal(String id) {
+  _serial.print(SET_TEXT_NORMAL_COMMAND);
+  _serial.print(SEPARATOR);
+  _serial.print(id);
+  _serial.println(SEPARATOR);
+}
+void EmbedUI::setTextBold(String id) {
+  _serial.print(SET_TEXT_BOLD_COMMAND);
+  _serial.print(SEPARATOR);
+  _serial.print(id);
+  _serial.println(SEPARATOR);
+}
+void EmbedUI::setTextItalic(String id) {
+  _serial.print(SET_TEXT_ITALIC_COMMAND);
+  _serial.print(SEPARATOR);
+  _serial.print(id);
+  _serial.println(SEPARATOR);
+}
+
+void EmbedUI::setTextAlignment(String id, int alignment)
+{
+  _serial.print(SET_TEXT_ALIGNMENT_COMMAND);
+  _serial.print(SEPARATOR);
+  _serial.print(id);
+  _serial.print(SEPARATOR);
+  _serial.print(String(alignment));
+  _serial.println(SEPARATOR);
+}
+
 void EmbedUI::removeObject(String id) {
   _serial.print(REMOVE_OBJECT_COMMAND);
   _serial.print(SEPARATOR);

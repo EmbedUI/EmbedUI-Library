@@ -46,6 +46,7 @@
 #define UPDATE_BUTTON_TEXT_COMMAND "UBT"
 #define UPDATE_TEXT_POS_COMMAND "UTP"
 #define CREATE_TEXT_COMMAND "CT"
+#define UPDATE_TEXT_FONT_COMMAND "UTF"
 #define UPDATE_COLOR_COMMAND "UFC"
 #define UPDATE_BACKGROUND_COLOR_COMMAND "UBC"
 #define UPDATE_POSITION_COMMAND "UP"
@@ -72,6 +73,13 @@
 #define CREATE_VIDEO_FROM_FILE_COMMAND "CVF"
 #define ADD_UNDERLINE_COMMAND "AU"
 #define ADD_STRIKE_THROUGH_COMMAND "AST"
+#define CREATE_TEXT_BOX_COMMAND "CTB"
+#define SET_FONT_WEIGHT_COMMAND "SFW"
+#define SET_TEXT_NORMAL_COMMAND "STN"
+#define SET_TEXT_BOLD_COMMAND "STB"
+#define SET_TEXT_ITALIC_COMMAND "STI"
+#define SET_TEXT_ALIGNMENT_COMMAND "STA"
+
 
 #define CLICK_EVENT 1
 #define HOVER_EVENT 2
@@ -79,16 +87,20 @@
 #define MOUSE_OUT_EVENT 4
 
 #define LINEAR 100
-#define SOFT 200
-#define SOFT_START 300
-#define SOFT_END 400
-#define SOFT_START_END 500
+#define SOFT 101
+#define SOFT_START 102
+#define SOFT_END 103
+#define SOFT_START_END 104
 
-
+#define CENTER_ALIGN 200
+#define LEFT_ALIGN 201
+#define RIGHT_ALIGN 202
+#define JUSTIFY_TEXT 203
 
 class Font {
   public:
     Font(String font_link, String font_name, String font_fallback);
+	Font(String font_fallback);
     String _font_link = "";
     String _font_name = "";
     String _font_fallback = "";
@@ -120,16 +132,23 @@ class EmbedUI
     void setOpacity(String id , int opacity);
 	void setRotation(String id,float degrees);
 	void setTransition(String id, int transition_type, unsigned long  transition_duration, unsigned long  transition_delay);
-	void addUnderline(String id, uint32_t color);
-	void addStrikeThrough(String id, uint32_t color);
     void removeObject(String id);
-	
+
     void addEvent(String id, int event, void (*callBack_func)());
     void handleEvents();
 	
     String createText(String text_data, long font_size, long x, long y, uint32_t fg_color, bool hasBackground, uint32_t bg_color , long padding_x , long padding_y, bool center_align_x, bool center_align_y, String id );
+	String createTextBox(String text_data, long font_size, long x, long y, long w, long h, uint32_t text_color, bool hasBackground, uint32_t bg_color , long padding_x , long padding_y, bool center_align_x, bool center_align_y, String id );
     void updateText(String id, String value);
     void updateTextColor(String id, uint32_t new_color);
+    void updateTextFont(String id, Font font);
+	void addUnderline(String id, uint32_t color);
+	void addStrikeThrough(String id, uint32_t color);
+	void setFontWeight(String id, int font_weight);
+	void setTextNormal(String id);
+	void setTextBold(String id);
+	void setTextItalic(String id);
+	void setTextAlignment(String id, int alignment);
 	
     String createLine(long x1, long y1, long x2, long y2, long line_thickness, uint32_t fill_color , String id);
     String createRect(long x, long y, long w, long h, long border_thickness, uint32_t b_color, String id );
