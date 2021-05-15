@@ -69,7 +69,7 @@
 #define ADD_EVENT_COMMAND "AE"
 #define CREATE_IMAGE_COMMAND "CI"
 #define CREATE_IMAGE_FROM_FILE_COMMAND "CIF"
-#define CREATE_VIDEO_COMMAND "CV"
+#define CREATE_VIDEO_COMMAND "CVL"
 #define CREATE_VIDEO_FROM_FILE_COMMAND "CVF"
 #define ADD_UNDERLINE_COMMAND "AU"
 #define ADD_STRIKE_THROUGH_COMMAND "AST"
@@ -79,6 +79,7 @@
 #define SET_TEXT_BOLD_COMMAND "STB"
 #define SET_TEXT_ITALIC_COMMAND "STI"
 #define SET_TEXT_ALIGNMENT_COMMAND "STA"
+#define OPEN_EXTERNAL_LINK_COMMAND "OEL"
 
 
 #define CLICK_EVENT 1
@@ -132,6 +133,7 @@ class EmbedUI
     void setOpacity(String id , int opacity);
 	void setRotation(String id,float degrees);
 	void setTransition(String id, int transition_type, unsigned long  transition_duration, unsigned long  transition_delay);
+	void openExternalLink(String external_link);
     void removeObject(String id);
 
     void addEvent(String id, int event, void (*callBack_func)());
@@ -149,6 +151,7 @@ class EmbedUI
 	void setTextBold(String id);
 	void setTextItalic(String id);
 	void setTextAlignment(String id, int alignment);
+	
 	
     String createLine(long x1, long y1, long x2, long y2, long line_thickness, uint32_t fill_color , String id);
     String createRect(long x, long y, long w, long h, long border_thickness, uint32_t b_color, String id );

@@ -367,7 +367,7 @@ void  EmbedUI::addEvent(String id, int event, void (*callBack_func)())
 
   EventListener Event;
   Event.objectId = id;
-  Event.event = HOVER_EVENT;
+  Event.event = event;
   Event.callBack_func = callBack_func;
   allEvents[eventCount++] = Event;
 }
@@ -380,15 +380,16 @@ void EmbedUI::handleEvents()
     String key = DATA.substring(0, DATA.indexOf('\x01'));
     DATA = DATA.substring(DATA.indexOf('\x01') + 1);
     String object_id = DATA.substring(0, DATA.indexOf('\x01'));
-
     for (long i = 0; i < eventCount ; i++)
     {
+	
       if (allEvents[i].event == key.toInt())
       {
         if (allEvents[i].objectId == object_id)
         {
 
           allEvents[i].callBack_func();
+		  break;
         }
       }
     }
@@ -547,6 +548,8 @@ void EmbedUI::clear()
 {
   _serial.print(CLEAR_COMMAND);
   _serial.println(SEPARATOR);
+  eventCount=0;
+  
 }
 void EmbedUI::addFont(Font font)
 {
@@ -687,6 +690,14 @@ void EmbedUI::setTextAlignment(String id, int alignment)
   _serial.print(id);
   _serial.print(SEPARATOR);
   _serial.print(String(alignment));
+  _serial.println(SEPARATOR);
+}
+
+void EmbedUI::openExternalLink(String external_link)
+{
+ _serial.print(OPEN_EXTERNAL_LINK_COMMAND);
+  _serial.print(SEPARATOR);
+  _serial.print(external_link);
   _serial.println(SEPARATOR);
 }
 
