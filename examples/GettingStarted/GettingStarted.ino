@@ -6,7 +6,9 @@
 
   Author: Maker Vinod (https://github.com/makervinod)
   Website: www.makervinod.in
-  Created:  10/05/2021
+  Created:  15/05/2021
+
+  UI Design: Devednya Vyas (https://devednyav.xyz)
 
   This software is licensed under MIT License
 
@@ -30,7 +32,9 @@
   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
   SOFTWARE.
 
-  Rotate Objects
+  Getting Started Demo
+
+  Simply Upload this Code to your favourite board (having SRAM > 4kB) & get ready for exploring things :-)
 
 */
 
@@ -55,7 +59,17 @@
 #define MAX_SCREEN_WIDTH 1920
 #define MAX_SCREEN_HEIGHT 1080
 
-EmbedUI display(Serial); //The Serial port to connect (Currently Supporting Hardware Serial Ports) (Do not use Serial if used over here)
+//Variable to store the Current Page index
+int currentMenuIndex = 0;
+
+//Activates Animation on page 4
+bool enableAnimation = false;
+
+//some more helper variables
+unsigned long startPoint = 0;
+int animationStep = -1;
+
+EmbedUI display(Serial); //The Serial port to connect (Currently Supporting Hardware Serial Ports) (Do not use Serial further, if used over here)
 
 void setup() {
 
@@ -65,65 +79,68 @@ void setup() {
 
   display.clear(); //Clear Screen Contents, if any
 
-  display.setDisplayBackgroundColor(BLACK);//set the background color of the screen
+  display.setDisplayBackgroundColor(WHITE);//set the background color of the screen
 
-  //Load an Image on the UI in the center of the screen from an external link
-  /*
-     Create Image.
-     Parameters: external_image_link(String), x, y, w, h, id(String)
-  */
-  display.createImageFromLink("https://embedui.github.io/img/arduino_logo.png", MAX_SCREEN_WIDTH / 2 - MAX_SCREEN_HEIGHT / 4,
-                              MAX_SCREEN_HEIGHT / 2 - MAX_SCREEN_HEIGHT / 4, MAX_SCREEN_HEIGHT / 2, MAX_SCREEN_HEIGHT / 2, "ArduinoLogo");
-
-  delay(1000); //Optional. Alter this as per your network speed
+  //Show home page and wait for events to happen
+  showHomePage();
 }
 
-void loop() {
-
-  //Lets's Rotate it
-  rotate_object();
-
-}
-
-//Rotation plan - 2 times > 360 degress & 2 times > 90 to -90
-void rotate_object()
+void loop()
 {
-  for (int i = 0; i < 2; i++)
+  //Required for listening to UI Events
+  display.handleEvents();
+
+  //This one is going to handle our animation in Page4
+  animateObjects();
+}
+
+//Function to change animations (Transitions needed to be applied to objects, in order to animate them - Check PageContent4.ino for more info)
+void animateObjects()
+{
+  if ((currentMenuIndex == 4) & (enableAnimation == true))
   {
-    for (int j = 0; j < 360; j++)
+    if ((millis() - startPoint) > 2000)
     {
-      //Rotate the specified object
-      /*
-        Rotate Object.
-        Parameters: object_id(String), rotation(degrees)
-      */
-      display.setRotation("ArduinoLogo", j);
-      delay(10);
+      animationStep += 1;
+      switch (animationStep)
+      {
+        case 0: {
+            display.setSize("ar", 30, 30);
+          }
+          break;
+        case 1: {
+            display.setRotation("ar", 360);
+          }
+          break;
+        case 2: {
+            display.setSize("ar", 15, 15);
+          }
+          break;
+        case 3: {
+            display.updatePosition("ar", 363, 562);
+          }
+          break;
+        case 4: {
+            display.setSize("ar", 62, 15);
+          }
+          break;
+        case 5: {
+            display.setSize("ar", 15, 15);
+            display.updatePosition("ar", 386, 562);
+          }
+          break;
+        case 6: {
+            display.setRotation("ar", 0);
+            display.updatePosition("ar", 376, 554);
+            animationStep = -1;
+          }
+          break;
+      }
+      startPoint = millis();
     }
   }
-  delay(1000);
-  for (int i = 0; i < 2; i++)
+  else
   {
-    for (int j = 0; j < 90; j++)
-    {
-      display.setRotation("ArduinoLogo", j);
-      delay(10);
-    }
-    for (int j = 90; j >= 0; j--)
-    {
-      display.setRotation("ArduinoLogo", j);
-      delay(10);
-    }
-    for (int j = 0; j >= -90; j--)
-    {
-      display.setRotation("ArduinoLogo", j);
-      delay(10);
-    }
-    for (int j = -90; j < 0; j++)
-    {
-      display.setRotation("ArduinoLogo", j);
-      delay(10);
-    }
+    animationStep = -1;
   }
-  delay(1000);
 }
