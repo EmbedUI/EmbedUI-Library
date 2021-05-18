@@ -1,27 +1,28 @@
 /*
   EmbedUI Hardware Library - https://github.com/EmbedUI/EmbedUI-Library
-  
+
   EmbedUI Application - https://github.com/EmbedUI/EmbedUI-App
   (Download EmbedUI Application from above link)
-  
+
   Author: Maker Vinod (https://github.com/makervinod)
   Website: www.makervinod.in
   Created:  05/05/2021
-  
+  Updated:  15/05/2021
+
   This software is licensed under MIT License
-  
+
   Copyright (c) 2021 EmbedUI
-  
+
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files (the "Software"), to deal
   in the Software without restriction, including without limitation the rights
   to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
   copies of the Software, and to permit persons to whom the Software is
   furnished to do so, subject to the following conditions:
-  
+
   The above copyright notice and this permission notice shall be included in all
   copies or substantial portions of the Software.
-  
+
   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -29,8 +30,8 @@
   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
   SOFTWARE.
- 
- */
+
+*/
 
 #include "Arduino.h"
 #include "EmbedUI.h"
@@ -40,6 +41,7 @@ Font::Font(String font_link, String font_name, String font_fallback) {
   _font_name = font_name;
   _font_fallback = font_fallback;
 }
+
 Font::Font( String font_fallback) {
   _font_link = "";
   _font_name = "";
@@ -47,8 +49,8 @@ Font::Font( String font_fallback) {
 }
 
 String EmbedUI::createText(String text_data, long font_size, long x, long y,
-                               uint32_t fg_color , bool hasBackground , uint32_t bg_color , long padding_x ,
-                               long padding_y , bool center_align_x , bool center_align_y , String id )
+                           uint32_t fg_color , bool hasBackground , uint32_t bg_color , long padding_x ,
+                           long padding_y , bool center_align_x , bool center_align_y , String id )
 {
   _serial.print(CREATE_TEXT_COMMAND);
   _serial.print(SEPARATOR);
@@ -115,7 +117,6 @@ String EmbedUI::createTextBox(String text_data, long font_size, long x, long y, 
   _serial.println();
   return id;
 }
-
 
 void EmbedUI::updateText(String id, String value) {
   _serial.print(UPDATE_TEXT_COMMAND);
@@ -230,6 +231,7 @@ String EmbedUI::createFilledRect(long x, long y, long w, long h, uint32_t fill_c
   _serial.println();
   return id;
 }
+
 String EmbedUI::createFilledRoundRect(long x, long y, long w, long h, long border_radius, uint32_t fill_color , String id )
 {
   _serial.print(FILLED_ROUND_RECT_COMMAND);
@@ -382,14 +384,14 @@ void EmbedUI::handleEvents()
     String object_id = DATA.substring(0, DATA.indexOf('\x01'));
     for (long i = 0; i < eventCount ; i++)
     {
-	
+
       if (allEvents[i].event == key.toInt())
       {
         if (allEvents[i].objectId == object_id)
         {
 
           allEvents[i].callBack_func();
-		  break;
+          break;
         }
       }
     }
@@ -458,7 +460,6 @@ String EmbedUI::createImageFromLink(String link, long x, long y, long w, long h,
   return id;
 }
 
- 
 String EmbedUI::createImageFromFile(String file_name, long x, long y, long w, long h,  String id)
 {
   _serial.print(CREATE_IMAGE_FROM_FILE_COMMAND);
@@ -506,7 +507,7 @@ String EmbedUI::createVideoFromLink(String link, long x, long y, long w, long h,
   _serial.println();
   return id;
 }
- 
+
 String EmbedUI::createVideoFromFile(String file_name, long x, long y, long w, long h, bool enable_controls, bool mute_audio, bool enable_autoplay, bool loop_video, String id)
 {
   _serial.print(CREATE_VIDEO_FROM_FILE_COMMAND);
@@ -534,8 +535,7 @@ String EmbedUI::createVideoFromFile(String file_name, long x, long y, long w, lo
   _serial.println();
   return id;
 }
- 
-	
+
 EmbedUI::EmbedUI(HardwareSerial & serial): _serial(serial) {
 }
 
@@ -544,13 +544,14 @@ void EmbedUI::begin(uint32_t baudrate) {
   _serial.begin(baudrate);
   _serial.println();
 }
+
 void EmbedUI::clear()
 {
   _serial.print(CLEAR_COMMAND);
   _serial.println(SEPARATOR);
-  eventCount=0;
-  
+  eventCount = 0;
 }
+
 void EmbedUI::addFont(Font font)
 {
   _serial.print(ADD_FONT_COMMAND);
@@ -558,6 +559,7 @@ void EmbedUI::addFont(Font font)
   _serial.print(font._font_link);
   _serial.println(SEPARATOR);
 }
+
 void EmbedUI::setGlobalFont(Font font)
 {
   _serial.print(GLOBAL_FONT_COMMAND);
@@ -565,6 +567,7 @@ void EmbedUI::setGlobalFont(Font font)
   _serial.print("'" + font._font_name + "'," + font._font_fallback);
   _serial.println(SEPARATOR);
 }
+
 void EmbedUI::setDisplayBackgroundColor(uint32_t color)
 {
   _serial.print(DISPLAY_BG_COLOR_COMMAND);
@@ -572,6 +575,7 @@ void EmbedUI::setDisplayBackgroundColor(uint32_t color)
   _serial.print(String(color, HEX));
   _serial.println(SEPARATOR);
 }
+
 void EmbedUI::setForegroundColor(String id, uint32_t new_color) {
   _serial.print(UPDATE_COLOR_COMMAND);
   _serial.print(SEPARATOR);
@@ -580,6 +584,7 @@ void EmbedUI::setForegroundColor(String id, uint32_t new_color) {
   _serial.print(String(new_color, HEX));
   _serial.println(SEPARATOR);
 }
+
 void EmbedUI::setBackgroundColor(String id, uint32_t new_color) {
   _serial.print(UPDATE_BACKGROUND_COLOR_COMMAND);
   _serial.print(SEPARATOR);
@@ -588,6 +593,7 @@ void EmbedUI::setBackgroundColor(String id, uint32_t new_color) {
   _serial.print(String(new_color, HEX));
   _serial.println(SEPARATOR);
 }
+
 void EmbedUI::updatePosition(String id, long x, long y) {
   _serial.print(UPDATE_POSITION_COMMAND);
   _serial.print(SEPARATOR);
@@ -598,6 +604,7 @@ void EmbedUI::updatePosition(String id, long x, long y) {
   _serial.print(String(y));
   _serial.println(SEPARATOR);
 }
+
 void EmbedUI::setSize(String id, long w, long h) {
   _serial.print(UPDATE_SIZE_COMMAND);
   _serial.print(SEPARATOR);
@@ -608,6 +615,7 @@ void EmbedUI::setSize(String id, long w, long h) {
   _serial.print(String(h));
   _serial.println(SEPARATOR);
 }
+
 void EmbedUI::setVisibility(String id, bool visible) {
   _serial.print(UPDATE_VISIBILTY_COMMAND);
   _serial.print(SEPARATOR);
@@ -616,7 +624,8 @@ void EmbedUI::setVisibility(String id, bool visible) {
   _serial.print(String(visible));
   _serial.println(SEPARATOR);
 }
-void EmbedUI::setRotation(String id, float degrees){
+
+void EmbedUI::setRotation(String id, float degrees) {
   _serial.print(SET_ROTATION_COMMAND);
   _serial.print(SEPARATOR);
   _serial.print(id);
@@ -624,6 +633,7 @@ void EmbedUI::setRotation(String id, float degrees){
   _serial.print(String(degrees));
   _serial.println(SEPARATOR);
 }
+
 void EmbedUI::setTransition(String id, int transition_type, unsigned long transition_duration, unsigned long transition_delay)
 {
   _serial.print(SET_TRANSITION_COMMAND);
@@ -637,6 +647,7 @@ void EmbedUI::setTransition(String id, int transition_type, unsigned long transi
   _serial.print(String(transition_delay));
   _serial.println(SEPARATOR);
 }
+
 void EmbedUI::addUnderline(String id, uint32_t color)
 {
   _serial.print(ADD_UNDERLINE_COMMAND);
@@ -646,6 +657,7 @@ void EmbedUI::addUnderline(String id, uint32_t color)
   _serial.print(String(color, HEX));
   _serial.println(SEPARATOR);
 }
+
 void EmbedUI::addStrikeThrough(String id, uint32_t color)
 {
   _serial.print(ADD_STRIKE_THROUGH_COMMAND);
@@ -655,6 +667,7 @@ void EmbedUI::addStrikeThrough(String id, uint32_t color)
   _serial.print(String(color, HEX));
   _serial.println(SEPARATOR);
 }
+
 void EmbedUI::setFontWeight(String id, int font_weight)
 {
   _serial.print(SET_FONT_WEIGHT_COMMAND);
@@ -670,12 +683,14 @@ void EmbedUI::setTextNormal(String id) {
   _serial.print(id);
   _serial.println(SEPARATOR);
 }
+
 void EmbedUI::setTextBold(String id) {
   _serial.print(SET_TEXT_BOLD_COMMAND);
   _serial.print(SEPARATOR);
   _serial.print(id);
   _serial.println(SEPARATOR);
 }
+
 void EmbedUI::setTextItalic(String id) {
   _serial.print(SET_TEXT_ITALIC_COMMAND);
   _serial.print(SEPARATOR);
@@ -695,7 +710,7 @@ void EmbedUI::setTextAlignment(String id, int alignment)
 
 void EmbedUI::openExternalLink(String external_link)
 {
- _serial.print(OPEN_EXTERNAL_LINK_COMMAND);
+  _serial.print(OPEN_EXTERNAL_LINK_COMMAND);
   _serial.print(SEPARATOR);
   _serial.print(external_link);
   _serial.println(SEPARATOR);
@@ -707,6 +722,7 @@ void EmbedUI::removeObject(String id) {
   _serial.print(id);
   _serial.println(SEPARATOR);
 }
+
 void EmbedUI::setOpacity(String id, int opacity )
 {
   _serial.print(UPDATE_OPACITY_COMMAND);
@@ -716,6 +732,7 @@ void EmbedUI::setOpacity(String id, int opacity )
   _serial.print(String(opacity));
   _serial.println(SEPARATOR);
 }
+
 uint32_t EmbedUI::color(uint8_t r, uint8_t g, uint8_t b) {
   return ((uint32_t)r << 16) | ((uint32_t)g <<  8) | b;
 }
