@@ -1,27 +1,28 @@
 /*
   EmbedUI Hardware Library - https://github.com/EmbedUI/EmbedUI-Library
-  
+
   EmbedUI Application - https://github.com/EmbedUI/EmbedUI-App
   (Download EmbedUI Application from above link)
-  
+
   Author: Maker Vinod (https://github.com/makervinod)
   Website: www.makervinod.in
   Created:  05/05/2021
-  
+  Updated:  15/05/2021
+
   This software is licensed under MIT License
-  
+
   Copyright (c) 2021 EmbedUI
-  
+
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files (the "Software"), to deal
   in the Software without restriction, including without limitation the rights
   to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
   copies of the Software, and to permit persons to whom the Software is
   furnished to do so, subject to the following conditions:
-  
+
   The above copyright notice and this permission notice shall be included in all
   copies or substantial portions of the Software.
-  
+
   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -29,8 +30,8 @@
   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
   SOFTWARE.
- 
- */
+
+*/
 
 
 #include "Arduino.h"
@@ -46,11 +47,14 @@
 #define UPDATE_BUTTON_TEXT_COMMAND "UBT"
 #define UPDATE_TEXT_POS_COMMAND "UTP"
 #define CREATE_TEXT_COMMAND "CT"
+#define UPDATE_TEXT_FONT_COMMAND "UTF"
 #define UPDATE_COLOR_COMMAND "UFC"
 #define UPDATE_BACKGROUND_COLOR_COMMAND "UBC"
 #define UPDATE_POSITION_COMMAND "UP"
-#define  UPDATE_SIZE_COMMAND "US"
+#define UPDATE_SIZE_COMMAND "US"
 #define UPDATE_VISIBILTY_COMMAND "UV"
+#define SET_ROTATION_COMMAND "SR"
+#define SET_TRANSITION_COMMAND "ST"
 #define REMOVE_OBJECT_COMMAND "RO"
 #define UPDATE_OPACITY_COMMAND "UO"
 #define LINE_COMMAND "L"
@@ -65,15 +69,39 @@
 #define CREATE_BUTTON_COMMAND "CB"
 #define ADD_EVENT_COMMAND "AE"
 #define CREATE_IMAGE_COMMAND "CI"
+#define CREATE_IMAGE_FROM_FILE_COMMAND "CIF"
+#define CREATE_VIDEO_COMMAND "CVL"
+#define CREATE_VIDEO_FROM_FILE_COMMAND "CVF"
+#define ADD_UNDERLINE_COMMAND "AU"
+#define ADD_STRIKE_THROUGH_COMMAND "AST"
+#define CREATE_TEXT_BOX_COMMAND "CTB"
+#define SET_FONT_WEIGHT_COMMAND "SFW"
+#define SET_TEXT_NORMAL_COMMAND "STN"
+#define SET_TEXT_BOLD_COMMAND "STB"
+#define SET_TEXT_ITALIC_COMMAND "STI"
+#define SET_TEXT_ALIGNMENT_COMMAND "STA"
+#define OPEN_EXTERNAL_LINK_COMMAND "OEL"
 
 #define CLICK_EVENT 1
 #define HOVER_EVENT 2
 #define MOUSE_IN_EVENT 3
 #define MOUSE_OUT_EVENT 4
 
+#define LINEAR 100
+#define SOFT 101
+#define SOFT_START 102
+#define SOFT_END 103
+#define SOFT_START_END 104
+
+#define CENTER_ALIGN 200
+#define LEFT_ALIGN 201
+#define RIGHT_ALIGN 202
+#define JUSTIFY_TEXT 203
+
 class Font {
   public:
     Font(String font_link, String font_name, String font_fallback);
+    Font(String font_fallback);
     String _font_link = "";
     String _font_name = "";
     String _font_fallback = "";
@@ -102,13 +130,28 @@ class EmbedUI
     void updatePosition(String id, long x, long y);
     void setSize(String id, long w, long h);
     void setVisibility(String id, bool visible);
-    void removeObject(String id);
     void setOpacity(String id , int opacity);
+    void setRotation(String id, float degrees);
+    void setTransition(String id, int transition_type, unsigned long  transition_duration, unsigned long  transition_delay);
+    void openExternalLink(String external_link);
+    void removeObject(String id);
+
     void addEvent(String id, int event, void (*callBack_func)());
     void handleEvents();
+
     String createText(String text_data, long font_size, long x, long y, uint32_t fg_color, bool hasBackground, uint32_t bg_color , long padding_x , long padding_y, bool center_align_x, bool center_align_y, String id );
+    String createTextBox(String text_data, long font_size, long x, long y, long w, long h, uint32_t text_color, bool hasBackground, uint32_t bg_color , long padding_x , long padding_y, bool center_align_x, bool center_align_y, String id );
     void updateText(String id, String value);
     void updateTextColor(String id, uint32_t new_color);
+    void updateTextFont(String id, Font font);
+    void addUnderline(String id, uint32_t color);
+    void addStrikeThrough(String id, uint32_t color);
+    void setFontWeight(String id, int font_weight);
+    void setTextNormal(String id);
+    void setTextBold(String id);
+    void setTextItalic(String id);
+    void setTextAlignment(String id, int alignment);
+
     String createLine(long x1, long y1, long x2, long y2, long line_thickness, uint32_t fill_color , String id);
     String createRect(long x, long y, long w, long h, long border_thickness, uint32_t b_color, String id );
     String createRoundRect(long x, long y, long w, long h, long border_thickness, long border_radius, uint32_t b_color , String id );
@@ -118,10 +161,16 @@ class EmbedUI
     String createFilledCircle(long x, long y, long radius, uint32_t fill_color, String id);
     String createTriangle(long x1, long y1, long x2, long y2, long x3, long y3,  long border_thickness, uint32_t b_color, String id);
     String createFilledTriangle(long x1, long y1, long x2, long y2, long x3, long y3, uint32_t fill_color, String id );
+
     String createButton(String button_text, long font_size, long x, long y, long w, long h, int border_radius, uint32_t text_color, uint32_t bg_color, void (*onclick_callBack)(), String id);
     void updateButtonText(String id, String value);
+
     String createImageFromLink(String link, long x, long y, long w, long h,  String id);
-    
+    String createImageFromFile(String file_name, long x, long y, long w, long h,  String id);
+
+    String createVideoFromLink(String link, long x, long y, long w, long h, bool enable_controls, bool mute_audio, bool enable_autoplay, bool loop_video, String id);
+    String createVideoFromFile(String file_name, long x, long y, long w, long h, bool enable_controls, bool mute_audio, bool enable_autoplay, bool loop_video, String id);
+
     uint32_t color(uint8_t _r, uint8_t _g, uint8_t _b);
 };
 
