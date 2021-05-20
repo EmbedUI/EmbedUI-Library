@@ -38,11 +38,11 @@ More Boards to be added to the list soon.
 
 ### 1) Getting Started
 
-![alt text](https://embedui.github.io/img/gettingStartedDemo.jpg "Getting Started")
+![image1](https://embedui.github.io/img/gettingStartedDemo.png "Getting Started")
 
 
 ### 2) Weather Dashboard
 
-![alt text](https://embedui.github.io/img/WeatherDashboard.jpg "Weather Dashboard")
+![alt text2](https://embedui.github.io/img/WeatherDashboard.jpg "Weather Dashboard")
 
 
