@@ -1,4 +1,4 @@
-# EmbedUI-Library v1.1.1
+# EmbedUI-Library v1.1.2
 
 
 EmbedUI  is an open source Project, for enthusiasts to speed-up & visualize UI development using Embedded Hardware.
