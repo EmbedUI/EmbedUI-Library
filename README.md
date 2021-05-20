@@ -23,8 +23,8 @@ Boards having atleast **4 kB** of SRAM are preferred for error-free operation.
 | :--------: |:-------------:|:-------------:| :---------:|
 | ESP32 DevKit v1 | ESP32 | ✔️     |     - |
 | NodeMCU | ESP8266|  ✔️    |    -   |
-| Arduino Uno | Atmega328P |   ❓   |   To be Tested    |
-| Arduino Nano | Atmega328P-AU |   ❓   |   To be Tested    |
+| Arduino Uno | Atmega328P |   ✔️    |  Limited Features    |
+| Arduino Nano | Atmega328P-AU |    ✔️   |   Limited Features   |
 | Arduino Mega | Atmega2560 |    ✔️   |  -   |
 | Arduino MKR1000 | - |   ❓   |   To be Tested    |
 | Arduino Zero | - |   ❓   |   To be Tested    |
