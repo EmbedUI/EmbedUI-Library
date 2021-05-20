@@ -45,3 +45,13 @@ More Boards to be added to the list soon.
 
 ![image2](https://github.com/EmbedUI/EmbedUI.github.io/blob/main/img/WeatherDashboard.jpg)
 
+
+<br>
+
+### Currently Open to Contribution of Examples to the library
+<br>
+
+Create an example of your choice & open an issue stating the addition of example with the link of your example repository. 
+
+The best examples will be surely added to the library stating the contribution of the respective user.
+
