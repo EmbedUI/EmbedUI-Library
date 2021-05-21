@@ -1,5 +1,6 @@
-# EmbedUI-Library v1.1.2
+# EmbedUI-Library v1.1.2 
 
+![GitHub](https://img.shields.io/github/license/EmbedUI/EmbedUI-Library?style=for-the-badge) ![GitHub all releases](https://img.shields.io/github/downloads/EmbedUI/EmbedUI-Library/total?style=for-the-badge)
 
 EmbedUI  is an open source Project, for enthusiasts to speed-up & visualize UI development using Embedded Hardware.
 
@@ -53,5 +54,7 @@ More Boards to be added to the list soon.
 
 Create an example of your choice & open an issue stating the addition of example with the link of your example repository. 
 
-The best examples will be surely added to the library stating the contribution of the respective user.
+The best examples will be surely added to the library stating the contribution of the respective user. 
+
+
 
